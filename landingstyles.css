@@ -1,0 +1,138 @@
+/*Mobile First*/
+* {
+    z-index: 4;
+}
+
+body {
+    min-width: 450px; 
+    width: auto !important;
+    min-height: 100vh;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    
+    
+    background: #93cede; /* Old browsers */
+    background: -moz-linear-gradient(top, #93cede 0%, #75bdd1 41%, #49a5bf 100%); /* FF3.6-15 */
+    background: -webkit-linear-gradient(top, #93cede 0%,#75bdd1 41%,#49a5bf 100%); /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(to bottom, #93cede 0%,#75bdd1 41%,#49a5bf 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#93cede', endColorstr='#49a5bf',GradientType=0 ); /* IE6-9 */
+    background-repeat: repeat-x;
+    
+    z-index: 5;
+}
+
+#overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 8;
+}
+
+#container {
+    min-height: 100vh;
+    z-index: 6;
+}
+
+header {
+    width: 90%;
+    min-height: 150px;
+    border: 1px solid pink;
+    margin: 20px auto 5px auto;
+    padding: 0;
+    z-index: 7;
+    position: relative;
+}
+
+h2 {
+    margin: 0 auto;
+    text-align: center;
+    font: 35px 'Amatic SC';
+}
+
+#searchbarcontainer {
+    width: 60%;
+    min-height: 30px;
+    margin: 5px auto;
+    /*border: 1px solid black;*/
+}
+
+#inputfield {
+    width: calc(50%);
+    height: 24px;
+    margin: 0 0 0 5%;
+    float: left;
+    /*direction: rtl;*/
+    font: 15px 'Jua';
+    padding-left: 15px;
+}
+
+#searchbutton {
+    height: 30px;
+    width: 30%;
+    background-color: purple;
+    margin: 0;
+    float: left;
+    text-align: center;
+    font: 1em 'Yellowtail';
+}
+
+#searchbutton:hover {
+    background-color: #6CA6E5;
+    transition: background-color 1s;
+}
+
+#resultsbox {
+    width: 90%;
+    height: 40%;
+    border: 1px solid pink;
+    margin: 10px auto;
+}
+
+#citysunrise {
+    width: 90%;
+    margin: 10px auto;
+    text-align: center;
+    font: 2em 'Amatic SC';
+}
+
+/* Mobile Only */
+@media only screen and (min-width: 600px) {
+    
+}
+
+/* Tablet */
+@media only screen and (min-width: 768px) {
+    #searchbarcontainer {
+        width: 45%;
+    }
+    
+    #inputfield {
+        width: calc(50%);
+        height: 24px;
+    }
+    
+    #searchbutton {
+        height: 30px;
+        width: 30%;
+    }
+}
+
+/* Desktop / Larger Screens */
+@media only screen and (min-width: 992px) {
+    #searchbarcontainer {
+        width: 30%;
+    }
+    
+    #inputfield {
+        width: calc(50%);
+        height: 24px;
+    }
+    
+    #searchbutton {
+        height: 30px;
+        width: 30%;
+    }
+}
