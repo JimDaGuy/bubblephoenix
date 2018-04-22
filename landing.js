@@ -12,6 +12,12 @@
     var canvas = undefined;
     var ctx = undefined;
     var canvasContainer = undefined;
+    var searchButton = undefined;
+    var queryBox = undefined;
+    
+    var previousSearchTerm;
+    //Charity Search API Key
+    var apiKey = "cc68fc7689c5d78a918241ff8c0eb905";
     
     //Particle Variables
     var maxParticles = 150;
@@ -32,6 +38,12 @@
         canvas = document.querySelector('canvas');
         ctx = canvas.getContext('2d');
         canvasContainer = document.querySelector('header');
+        searchButton = document.querySelector('#searchbutton');
+        queryBox = document.querySelector('input');
+        
+        searchButton.onclick = performSearch;
+        
+        
         
         //Set canvas to fit container size
         canvas.width = canvasContainer.offsetWidth;
@@ -97,6 +109,10 @@
         requestAnimationFrame(update);
     }
     
+    
+    
+    //Helper Functions
+    
     //Returns the time passed since the last time this function has been called
     function calculateDeltaTime() {
 		var now,fps;
@@ -118,6 +134,10 @@
     	return Math.max(min, Math.min(max, val));
     }
 
+
+
+
+    //Particle Functions
 	
 	//Iterates through the array of particles and draws them at their current location
 	function drawParticles(ctx) {
@@ -239,6 +259,42 @@
             particles.push(p);
             //console.dir(particles);
         }
+    }
+
+    
+    
+    //Search Functions
+    
+    function performSearch() {
+        //Grab search term
+        var searchTerm = queryBox.value;
+        
+        //Prevent searching for a query that is currently displayed
+        if(searchTerm == previousSearchTerm) 
+            return;
+        
+        //Parse string and split it into our search terms
+        var queries = searchTerm.split(", ");
+        var city = queries[0];
+        var state = queries[1];
+        
+        //Make API request
+        var apiCallLink = "https://data.orghunter.com/v1/charitysearch?user_key=" + apiKey + "&city=" + city + "&state=" + state;
+        
+        $.ajax({
+            crossDomain: true,
+            dataType: 'json',
+			url: apiCallLink,
+			headers: {
+			    'Access-Control-Allow-Origin': '*',
+			},
+			success: appendCharities,      
+        });
+        
+    }
+
+    var appendCharities = function(charities) {
+        console.dir(charities.data);
     }
 
     function resize() {
