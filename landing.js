@@ -289,7 +289,7 @@
 
         apiCallLink = encodeURIComponent(apiCallLink);
 
-        var url = "http://127.0.0.1:3000?url=" + apiCallLink;
+        var url = "https://bubblephoenix.csh.rit.edu" + "?url=" + apiCallLink;
 
         console.dir(url);
 
