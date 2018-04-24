@@ -38,6 +38,8 @@ function onRequest(request, response) {
       response.write(landingjs);
       response.end();
       return;
+    } else if (request.url === "/charitySearch") {
+
     }
     //Split after the ? mark to get the query string (key=value pairs)
     var query = request.url.split('?')[1];
