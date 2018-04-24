@@ -19,6 +19,8 @@
     var cData = undefined;
     var previousSearchTerm;
     var numResults = 5;
+
+    var uri = "https://bubblephoenix.csh.rit.edu";
     //Charity Search API Key
     var apiKey = "cc68fc7689c5d78a918241ff8c0eb905";
 
@@ -46,8 +48,6 @@
         resultsBox = document.querySelector('#resultsbox');
 
         searchButton.onclick = performSearch;
-
-
 
         //Set canvas to fit container size
         canvas.width = canvasContainer.offsetWidth;
@@ -100,7 +100,7 @@
         ctx.shadowColor = "#26466D";
         ctx.shadowBlur = 10;
     	ctx.font = "3em 'Jua', 'Comfortaa'";
-    	ctx.fillText("Bubble Pheonix", canvas.width / 2, 20);
+    	ctx.fillText("Bubble Phoenix", canvas.width / 2, 20);
 
     	//ctx.fillStyle = "cyan";
         //ctx.shadowColor = "pink";
@@ -289,9 +289,7 @@
 
         apiCallLink = encodeURIComponent(apiCallLink);
 
-        var url = "https://bubblephoenix.csh.rit.edu" + "?url=" + apiCallLink;
-
-        console.dir(url);
+        var url = uri + "?url=" + apiCallLink;
 
         var xhr = new XMLHttpRequest();
         xhr.onload = function() {

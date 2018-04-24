@@ -1,2 +1,2 @@
-# bubblepheonix
-Search tool for developers
+# Bubblep Phoenix
+Location-based charity search tool
