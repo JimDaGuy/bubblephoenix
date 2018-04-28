@@ -18,9 +18,10 @@
 
     var cData = undefined;
     var previousSearchTerm;
-    var numResults = 5;
+    var numResults = 25;
 
-    var uri = "https://bubblephoenix.csh.rit.edu";
+    //var uri = "http://127.0.0.1:3000";
+    var uri = "https://bubblephoenix.csh.rit.edu/";
     //Charity Search API Key
     var apiKey = "cc68fc7689c5d78a918241ff8c0eb905";
 
@@ -300,8 +301,10 @@
 
           //Fade out results and call the charity parsing function when the
           //last element fades
+          var fade = 0;
           for(var result of oldResults) {
-            $(result).fadeOut(400);
+            fade += 40;
+            $(result).fadeOut(300 + fade);
           }
 
           parseCharities(xhr.responseText);
@@ -313,29 +316,24 @@
     }
 
     function parseCharities(charities) {
+      if(!charities)
+        return;
+
       charities = JSON.parse(charities);
       cData = charities.data;
 
-      //console.dir(cData.length);
-      //console.dir(cData[0]);
+      if(!cData)
+      {
+        if(charities.code === "500")
+          console.dir("The search failed because Orghunter's Charity Search API servers are down right now");
+        return;
+      }
+
       for(var i = 0; i < cData.length; i++) {
         var charityName = cData[i].charityName;
-        //Trim string down to 20 characters
-        if(charityName.length > 20)
-          charityName = charityName.substring(0, 20);
 
-        //Add up to three categories
-        var category = "";
-        for(var j = 0; i < j; j++) {
-          if(cData[i].category[j]) {
-            category += cData[i].category[j];
-            if(j < 3)
-            category += ", ";
-          }
-        }
-        //Trim string down to 20 characters
-        if(category.length > 20)
-          category = category.substring(0, 20);
+        var category = "Category: ";
+        category += cData[i].category || "Not Provided";
 
         var city = cData[i].city;
         var state = cData[i].state;
@@ -346,29 +344,41 @@
     }
 
     function appendCharity( cName, cat, city, state, url) {
+      //Create elements for a search item and give them the neccesary classes
       var searchItemElement = document.createElement('div');
+      searchItemElement.classList.add("searchItem");
       var siName = document.createElement('span');
+      siName.classList.add("siName");
       var siCategory = document.createElement('span');
+      siCategory.classList.add("siCategory");
       var siCityState = document.createElement('span');
+      siCityState.classList.add("siCityState");
       var siLink = document.createElement('a');
+      siLink.classList.add("siLink");
+      siLink.target = "_blank";
 
+      //Set the content of the search item elements
       siName.innerHTML = cName;
       siCategory.innerHTML = cat;
       siCityState.innerHTML = city + ", " + state;
       siLink.href = url;
       siLink.innerHTML = "Donation Link";
 
+      //Append other elements to the search item
       searchItemElement.appendChild(siName);
       searchItemElement.appendChild(siCategory);
       searchItemElement.appendChild(siCityState);
       searchItemElement.appendChild(siLink);
 
+      //Append search item to the search box
       resultsBox.appendChild(searchItemElement);
     }
 
     function resize() {
         canvas.width = canvasContainer.offsetWidth;
         canvas.height = canvasContainer.offsetHeight;
+
+        resultsBox.width = window.innerWidth * .9;
 
         if(window.innerWidth >= 550) {
             particleLineRange = 25;

@@ -87,8 +87,68 @@ h2 {
 #resultsbox {
     width: 90%;
     height: 40%;
-    border: 1px solid pink;
+    border: 5px solid pink;
     margin: 10px auto;
+    max-height: 40vh;
+    overflow-y: scroll;
+}
+
+.searchItem {
+  background: #988864;
+	min-height: 20px;
+	height: auto;
+	overflow: auto;
+	padding: 5px;
+	margin: 2px 0;
+	border: 1px solid black;
+	color: #8DCCAD;
+	font: 1em 'Titan One', cursive;
+}
+
+.siName {
+	width: 45%;
+	float: left;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	overflow: hidden;
+}
+
+.siCategory {
+	width: 45%;
+	float: right;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	overflow: hidden;
+}
+
+.siCityState {
+	width: 45%;
+	float: left;
+	margin: 0 0 0 20px;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	overflow: hidden;
+}
+
+.siLink {
+	color: #FEA6A2;
+	width: 45%;
+	float: right;
+	text-align: right;
+	margin: 10px 0 0 20px;
+	text-decoration: none;
+	font: 1.25em 'Do Hyeon', cursive;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	overflow: hidden;
+}
+
+.siLink:hover {
+	text-decoration: underline;
+}
+
+.siLink:visited {
+	color: #FEA6A2;
 }
 
 #citysunrise {
@@ -96,7 +156,6 @@ h2 {
     margin: 10px auto;
     text-align: center;
     font: 2em 'Amatic SC';
-    display: none;
 }
 
 /* Mobile Only */
