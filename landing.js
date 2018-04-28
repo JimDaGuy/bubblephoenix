@@ -9,6 +9,7 @@
     var particleOverlayColor = "#80D0E5";
     var previousUpdateTime = undefined;
     var animationID = 0;
+    var container = undefined;
     var canvas = undefined;
     var ctx = undefined;
     var canvasContainer = undefined;
@@ -17,11 +18,15 @@
     var resultsBox = undefined;
 
     var cData = undefined;
-    var previousSearchTerm;
+    var previousSearchTerm = undefined;
     var numResults = 25;
 
-    //var uri = "http://127.0.0.1:3000";
-    var uri = "https://bubblephoenix.csh.rit.edu/";
+    var currLat = 0;
+    var currLong = 0;
+    var cityStateString = undefined;
+
+    var uri = "http://127.0.0.1:3000";
+    //var uri = "https://bubblephoenix.csh.rit.edu/";
     //Charity Search API Key
     var apiKey = "cc68fc7689c5d78a918241ff8c0eb905";
 
@@ -41,6 +46,7 @@
 
 
     function init() {
+        container = document.querySelector('#container');
         canvas = document.querySelector('canvas');
         ctx = canvas.getContext('2d');
         canvasContainer = document.querySelector('header');
@@ -96,18 +102,18 @@
         //Draw text
         ctx.globalAlpha = 1;
         ctx.textAlign = "center";
-    	ctx.textBaseline = "top";
-    	ctx.fillStyle = "pink";
+      	ctx.textBaseline = "top";
+      	ctx.fillStyle = "pink";
         ctx.shadowColor = "#26466D";
         ctx.shadowBlur = 10;
-    	ctx.font = "3em 'Jua', 'Comfortaa'";
-    	ctx.fillText("Bubble Phoenix", canvas.width / 2, 20);
+      	ctx.font = "3em 'Jua', 'Comfortaa'";
+      	ctx.fillText("Bubble Phoenix", canvas.width / 2, 20);
 
-    	//ctx.fillStyle = "cyan";
+    	   //ctx.fillStyle = "cyan";
         //ctx.shadowColor = "pink";
         ctx.shadowBlur = 10;
-    	ctx.font = "2em 'Yellowtail'";
-    	ctx.fillText("You can do some good", canvas.width / 2, 90);
+      	ctx.font = "2em 'Yellowtail'";
+      	ctx.fillText("You can do some good", canvas.width / 2, 90);
         ctx.restore();
 
         //Schedule call to update
@@ -262,7 +268,6 @@
 
             //Add particle to particle list
             particles.push(p);
-            //console.dir(particles);
         }
     }
 
@@ -277,6 +282,8 @@
         //Prevent searching for a query that is currently displayed
         if(!searchTerm || searchTerm.length === 0 || searchTerm == previousSearchTerm)
             return;
+
+        previousSearchTerm = searchTerm;
 
         //Parse string and split it into our search terms
         var queries = searchTerm.split(", ");
@@ -303,9 +310,12 @@
           //last element fades
           var fade = 0;
           for(var result of oldResults) {
-            fade += 40;
-            $(result).fadeOut(300 + fade);
+            fade += 20;
+            $(result).fadeOut(200 + fade);
           }
+
+          currLat = 0;
+          currLong = 0;
 
           parseCharities(xhr.responseText);
 
@@ -322,25 +332,44 @@
       charities = JSON.parse(charities);
       cData = charities.data;
 
-      if(!cData)
+      if(!cData || cData.length == 0)
       {
+        removePreviousSun();
+
+        //I kept this console dir in on purpose. Something should be printed
+        // if the API servers are down
+
         if(charities.code === "500")
           console.dir("The search failed because Orghunter's Charity Search API servers are down right now");
         return;
       }
 
+      var city = cData[0].city;
+      var state = cData[0].state;
+      var latLongLength = cData.length;
+
       for(var i = 0; i < cData.length; i++) {
+        if(cData[i].latitude && cData[i].longitude) {
+          currLat += parseFloat(cData[i].latitude);
+          currLong += parseFloat(cData[i].longitude);
+        }
+        else
+          latLongLength--;
+
         var charityName = cData[i].charityName;
 
         var category = "Category: ";
         category += cData[i].category || "Not Provided";
 
-        var city = cData[i].city;
-        var state = cData[i].state;
         var donationUrl = cData[i].donationUrl;
 
         appendCharity( charityName, category, city, state, donationUrl);
       }
+
+      currLat /= latLongLength;
+      currLong /= latLongLength;
+
+      getSunrise(currLat, currLong, city, state);
     }
 
     function appendCharity( cName, cat, city, state, url) {
@@ -372,6 +401,78 @@
 
       //Append search item to the search box
       resultsBox.appendChild(searchItemElement);
+    }
+
+    function getSunrise(lat, long, city, state) {
+      var apiCallLink = "https://api.sunrise-sunset.org/json?";
+      apiCallLink += "&lat=" + lat + "&lng=" + long + "&date=tomorrow";
+      apiCallLink = encodeURIComponent(apiCallLink);
+
+      var url = uri + "?url=" + apiCallLink;
+
+      var xhr = new XMLHttpRequest();
+      xhr.onload = function() {
+        setSunHeader(xhr.responseText, city, state);
+      }
+
+      xhr.open('GET', url);
+      xhr.send();
+    }
+
+    function setSunHeader(sunInfo, city, state) {
+      removePreviousSun();
+
+      var sunTime = JSON.parse(sunInfo);
+
+      var sunTimes = sunTime.results;
+
+      console.dir(sunTimes);
+
+      var sunRiseString = sunTimes.sunrise;
+
+      var hours = sunRiseString.substring(0, 2);
+      var time;
+      var ampm = sunRiseString.substring(sunRiseString.length - 2, sunRiseString.length);
+
+      if(hours[1] == ':') {
+        hours = parseInt(hours[0]);
+        time = sunRiseString.substring(1, sunRiseString.length - 2);
+      }
+      else {
+        hours = parseInt(hours);
+        time = sunRiseString.substring(2, sunRiseString.length - 2);
+      }
+
+      //Account for changing timezone
+      hours -= 4;
+      if(hours < 0) {
+        hours = 12 + hours;
+        if(ampm == "AM")
+          ampm = "PM";
+        else
+          ampm = "AM";
+      }
+
+      var sunRiseString = hours + time + ampm;
+
+      var sunString = "The sun will rise tomorrow at " + sunRiseString + "(EST) in "
+      + city + ", " + state + ". Go make the world a better place.";
+
+      var sunHeader = document.createElement("h3");
+      sunHeader.innerHTML = sunString;
+      sunHeader.classList.add("sunHeader");
+
+      container.appendChild(sunHeader);
+
+      setInterval(function() {
+        $(".sunHeader").show(400);
+      }, 450);
+    }
+
+    function removePreviousSun() {
+      if($(".sunHeader") != null) {
+        $(".sunHeader").fadeOut(400, function(){$(this).remove();});
+      }
     }
 
     function resize() {

@@ -52,6 +52,12 @@ h2 {
     font: 35px 'Amatic SC';
 }
 
+h3 {
+  margin: 0 auto;
+  text-align: center;
+  font: 25px 'Amatic SC';
+}
+
 #searchbarcontainer {
     width: 60%;
     min-height: 30px;
@@ -151,11 +157,12 @@ h2 {
 	color: #FEA6A2;
 }
 
-#citysunrise {
-    width: 90%;
-    margin: 10px auto;
-    text-align: center;
-    font: 2em 'Amatic SC';
+.sunHeader {
+  width: 90%;
+  margin: 10px auto;
+  text-align: center;
+  font: 2em 'Amatic SC';
+  display: none;
 }
 
 /* Mobile Only */
