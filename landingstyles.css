@@ -1,73 +1,73 @@
 /*Mobile First*/
 * {
-    z-index: 4;
+  z-index: 4;
 }
 
 body {
-    min-width: 450px;
-    width: auto !important;
-    min-height: 100vh;
-    height: 100%;
-    margin: 0;
-    padding: 0;
+  min-width: 450px;
+  width: auto !important;
+  min-height: 100vh;
+  height: 100%;
+  margin: 0;
+  padding: 0;
 
 
-    background: #93cede; /* Old browsers */
-    background: -moz-linear-gradient(top, #93cede 0%, #75bdd1 41%, #49a5bf 100%); /* FF3.6-15 */
-    background: -webkit-linear-gradient(top, #93cede 0%,#75bdd1 41%,#49a5bf 100%); /* Chrome10-25,Safari5.1-6 */
-    background: linear-gradient(to bottom, #93cede 0%,#75bdd1 41%,#49a5bf 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#93cede', endColorstr='#49a5bf',GradientType=0 ); /* IE6-9 */
-    background-repeat: repeat-x;
+  background: #93cede; /* Old browsers */
+  background: -moz-linear-gradient(top, #93cede 0%, #75bdd1 41%, #49a5bf 100%); /* FF3.6-15 */
+  background: -webkit-linear-gradient(top, #93cede 0%,#75bdd1 41%,#49a5bf 100%); /* Chrome10-25,Safari5.1-6 */
+  background: linear-gradient(to bottom, #93cede 0%,#75bdd1 41%,#49a5bf 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#93cede', endColorstr='#49a5bf',GradientType=0 ); /* IE6-9 */
+  background-repeat: repeat-x;
 
-    z-index: 5;
+  z-index: 5;
 }
 
 #overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 8;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 8;
 }
 
 #container {
-    min-height: 100vh;
-    z-index: 6;
+  min-height: 100vh;
+  z-index: 6;
 }
 
 header {
-    width: 90%;
-    min-height: 150px;
-    border: 1px solid pink;
-    margin: 20px auto 5px auto;
-    padding: 0;
-    z-index: 7;
-    position: relative;
+  width: 90%;
+  min-height: 150px;
+  border: 1px solid pink;
+  margin: 20px auto 5px auto;
+  padding: 0;
+  z-index: 7;
+  position: relative;
 }
 
 h2 {
-    margin: 0 auto;
-    text-align: center;
-    font: 35px 'Amatic SC';
+  margin: 0 auto;
+  text-align: center;
+  font: 35px 'Amatic SC';
 }
 
 #geoLocContainer {
-	width: 100%;
+  width: 100%;
 }
 
 #geoLocButton {
-    height: 30px;
-		margin: 0 45%; /*margin: 0 auto ins't working?*/
-    width: 10%;
-    background-color: lightgreen;
-    text-align: center;
-    font: 1em 'Yellowtail';
+  height: 30px;
+  margin: 0 42.5%; /*margin: 0 auto ins't working?*/
+  width: 15%;
+  background-color: lightgreen;
+  text-align: center;
+  font: 1em 'Yellowtail';
 }
 
 #geoLocButton:hover {
-    background-color: #6CA6E5;
-    transition: background-color 1s;
+  background-color: #6CA6E5;
+  transition: background-color 1s;
 }
 
 h3 {
@@ -77,112 +77,113 @@ h3 {
 }
 
 #searchbarcontainer {
-    width: 60%;
-    min-height: 30px;
-    margin: 5px auto;
-    /*border: 1px solid black;*/
+  width: 60%;
+  min-height: 30px;
+  margin: 5px auto;
+  /*border: 1px solid black;*/
 }
 
 #inputfield {
-    width: calc(50%);
-    height: 24px;
-    margin: 0 0 0 5%;
-    float: left;
-    /*direction: rtl;*/
-    font: 15px 'Jua';
-    padding-left: 15px;
+  width: calc(50%);
+  height: 24px;
+  margin: 0 0 0 5%;
+  float: left;
+  /*direction: rtl;*/
+  font: 15px 'Jua';
+  padding-left: 15px;
 }
 
 #searchbutton {
-    height: 30px;
-    width: 30%;
-    background-color: purple;
-    margin: 0;
-    float: left;
-    text-align: center;
-    font: 1em 'Yellowtail';
+  height: 30px;
+  width: 30%;
+  background-color: purple;
+  margin: 0;
+  float: left;
+  text-align: center;
+  font: 1em 'Yellowtail';
 }
 
 #searchbutton:hover {
-    background-color: #6CA6E5;
-    transition: background-color 1s;
+  background-color: #6CA6E5;
+  transition: background-color 1s;
 }
 
 #resultsbox {
-    width: 90%;
-    height: 40%;
-    border: 5px solid pink;
-    margin: 10px auto;
-    max-height: 40vh;
-    overflow-y: scroll;
+  width: 90%;
+  height: 40%;
+  border: 5px solid pink;
+  margin: 10px auto;
+  max-height: 40vh;
+  overflow-y: scroll;
 }
 
 .searchItem {
   background: #988864;
-	min-height: 20px;
-	height: auto;
-	overflow: auto;
-	padding: 5px;
-	margin: 2px 0;
-	border: 3px solid #381A52;
-	color: #8DCCAD;
-	font: 1em 'Titan One', cursive;
+  min-height: 20px;
+  height: auto;
+  overflow: auto;
+  padding: 5px;
+  margin: 2px 0;
+  display: none;
+  border: 3px solid #381A52;
+  color: #8DCCAD;
+  font: 1em 'Titan One', cursive;
   animation-name: searchBorderColor;
-	animation-duration: 4s;
-	animation-iteration-count: infinite;
-	animation-timing-function: linear;
+  animation-duration: 4s;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
 }
 
 @keyframes searchBorderColor {
   0% {border-color: #381A52;}
-	50% {border-color: #C45DE5;}
-	100% {border-color: #381A52;}
+  50% {border-color: #C45DE5;}
+  100% {border-color: #381A52;}
 }
 
 .siName {
-	width: 45%;
-	float: left;
-	text-overflow: ellipsis;
-	white-space: nowrap;
-	overflow: hidden;
+  width: 45%;
+  float: left;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
 }
 
 .siCategory {
-	width: 45%;
-	float: right;
-	text-overflow: ellipsis;
-	white-space: nowrap;
-	overflow: hidden;
+  width: 45%;
+  float: right;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
 }
 
 .siCityState {
-	width: 45%;
-	float: left;
-	margin: 0 0 0 20px;
-	text-overflow: ellipsis;
-	white-space: nowrap;
-	overflow: hidden;
+  width: 45%;
+  float: left;
+  margin: 0 0 0 20px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
 }
 
 .siLink {
-	color: #FEA6A2;
-	width: 45%;
-	float: right;
-	text-align: right;
-	margin: 10px 0 0 20px;
-	text-decoration: none;
-	font: 1.25em 'Do Hyeon', cursive;
-	text-overflow: ellipsis;
-	white-space: nowrap;
-	overflow: hidden;
+  color: #FEA6A2;
+  width: 45%;
+  float: right;
+  text-align: right;
+  margin: 10px 0 0 20px;
+  text-decoration: none;
+  font: 1.25em 'Do Hyeon', cursive;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
 }
 
 .siLink:hover {
-	text-decoration: underline;
+  text-decoration: underline;
 }
 
 .siLink:visited {
-	color: #FEA6A2;
+  color: #FEA6A2;
 }
 
 .sunHeader {
@@ -200,34 +201,44 @@ h3 {
 
 /* Tablet */
 @media only screen and (min-width: 768px) {
-    #searchbarcontainer {
-        width: 45%;
-    }
+  #geoLocButton {
+    margin: 0 45%; /*margin: 0 auto ins't working?*/
+    width: 10%;
+  }
 
-    #inputfield {
-        width: calc(50%);
-        height: 24px;
-    }
+  #searchbarcontainer {
+    width: 45%;
+  }
 
-    #searchbutton {
-        height: 30px;
-        width: 30%;
-    }
+  #inputfield {
+    width: calc(50%);
+    height: 24px;
+  }
+
+  #searchbutton {
+    height: 30px;
+    width: 30%;
+  }
 }
 
 /* Desktop / Larger Screens */
 @media only screen and (min-width: 992px) {
-    #searchbarcontainer {
-        width: 30%;
-    }
+  #geoLocButton {
+    margin: 0 45%; /*margin: 0 auto ins't working?*/
+    width: 10%;
+  }
 
-    #inputfield {
-        width: calc(50%);
-        height: 24px;
-    }
+  #searchbarcontainer {
+    width: 30%;
+  }
 
-    #searchbutton {
-        height: 30px;
-        width: 30%;
-    }
+  #inputfield {
+    width: calc(50%);
+    height: 24px;
+  }
+
+  #searchbutton {
+    height: 30px;
+    width: 30%;
+  }
 }

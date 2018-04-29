@@ -3,48 +3,43 @@
 <head>
 	<meta charset="utf-8" />
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="Bubble Phoenix searches for charities in any particular area">
-    <meta name="author" content="James DiGrazia">
-
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="Bubble Phoenix searches for charities in any particular area">
+	<meta name="author" content="James DiGrazia">
 	<title>Bubble Phoenix | Make the World Brighter</title>
 	<link rel="icon" type="image/png" href="resources/favicon.png">
-
-    <!-- Import JQuery-->
+	<!-- Import JQuery-->
 	<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
-
 	<!-- Import Stylesheet-->
 	<link rel="stylesheet" href="./landingstyles.css">
-
 	<!-- Main JS File -->
 	<script src="./landing.js"></script>
 </head>
 <body>
-    <div id="container">
-        <header>
-            <canvas id="overlay"></canvas>
-        </header>
-        <h2>Enter a city</h2>
-				<h3>(City, State Abbr.)</h3>
-				<div id="geoLocContainer">
-					<button id="geoLocButton">Home</button>
-				</div>
-        <div id="searchbarcontainer">
-            <input value="Buffalo, NY" id="inputfield">
-            <div id="citytermdropdown"></div>
-            <button id="searchbutton">Search</button>
-        </div>
-        <div id="resultsbox"></div>
+	<div id="container">
+		<header>
+			<canvas id="overlay"></canvas>
+		</header>
+		<h2>Enter a city</h2>
+		<h3>(City, State Abbr.)</h3>
+		<div id="geoLocContainer">
+			<button id="geoLocButton">Nearby</button>
 		</div>
-
-    <!--Web Font Loader-->
+		<div id="searchbarcontainer">
+			<input value="Buffalo, NY" id="inputfield">
+			<div id="citytermdropdown"></div>
+			<button id="searchbutton">Search</button>
+		</div>
+		<div id="resultsbox"></div>
+	</div>
+	<!--Web Font Loader-->
 	<script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js"></script>
 	<script>
-	  WebFont.load({
-	    google: {
-	      families: ['Yellowtail', 'Jua', 'Amatic SC', 'Titan One', "Do Hyeon"]
-	    }
-	  });
+	WebFont.load({
+		google: {
+			families: ['Yellowtail', 'Jua', 'Amatic SC', 'Titan One', "Do Hyeon"]
+		}
+	});
 	</script>
 </body>
 </html>
