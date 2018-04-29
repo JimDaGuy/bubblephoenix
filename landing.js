@@ -314,7 +314,7 @@
           //Fade out results and call the charity parsing function when the
           //last element fades
           var fade = 0;
-          for(var result of oldResults) {
+          for(var result in oldResults) {
             fade += 20;
             $(result).fadeOut(200 + fade);
           }
@@ -366,7 +366,7 @@
           //Fade out results and call the charity parsing function when the
           //last element fades
           var fade = 0;
-          for(var result of oldResults) {
+          for(var result in oldResults) {
             fade += 20;
             $(result).fadeOut(200 + fade);
           }
