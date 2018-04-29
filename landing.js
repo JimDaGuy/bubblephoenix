@@ -24,8 +24,8 @@
     var currLong = 0;
     var cityStateString = undefined;
 
-    var uri = "http://127.0.0.1:3000";
-    //var uri = "https://bubblephoenix.csh.rit.edu/";
+    //var uri = "http://127.0.0.1:3000";
+    var uri = "https://bubblephoenix.csh.rit.edu/";
     //Charity Search API Key
     var apiKey = "cc68fc7689c5d78a918241ff8c0eb905";
 
