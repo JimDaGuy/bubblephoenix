@@ -52,6 +52,24 @@ h2 {
     font: 35px 'Amatic SC';
 }
 
+#geoLocContainer {
+	width: 100%;
+}
+
+#geoLocButton {
+    height: 30px;
+		margin: 0 45%; /*margin: 0 auto ins't working?*/
+    width: 10%;
+    background-color: lightgreen;
+    text-align: center;
+    font: 1em 'Yellowtail';
+}
+
+#geoLocButton:hover {
+    background-color: #6CA6E5;
+    transition: background-color 1s;
+}
+
 h3 {
   margin: 0 auto;
   text-align: center;
@@ -106,9 +124,19 @@ h3 {
 	overflow: auto;
 	padding: 5px;
 	margin: 2px 0;
-	border: 1px solid black;
+	border: 3px solid #381A52;
 	color: #8DCCAD;
 	font: 1em 'Titan One', cursive;
+  animation-name: searchBorderColor;
+	animation-duration: 4s;
+	animation-iteration-count: infinite;
+	animation-timing-function: linear;
+}
+
+@keyframes searchBorderColor {
+  0% {border-color: #381A52;}
+	50% {border-color: #C45DE5;}
+	100% {border-color: #381A52;}
 }
 
 .siName {

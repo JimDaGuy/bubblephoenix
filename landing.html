@@ -10,11 +10,6 @@
 	<title>Bubble Phoenix | Make the World Brighter</title>
 	<link rel="icon" type="image/png" href="resources/favicon.png">
 
-	<!--Import Google Fonts-->
-	<link href="https://fonts.googleapis.com/css?family=Righteous" rel="stylesheet">
-	<!--Import Font Awesome-->
-	<script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
-
     <!-- Import JQuery-->
 	<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
 
@@ -31,6 +26,9 @@
         </header>
         <h2>Enter a city</h2>
 				<h3>(City, State Abbr.)</h3>
+				<div id="geoLocContainer">
+					<button id="geoLocButton">Home</button>
+				</div>
         <div id="searchbarcontainer">
             <input value="Buffalo, NY" id="inputfield"></input>
             <div id="citytermdropdown"></div>
@@ -44,7 +42,7 @@
 	<script>
 	  WebFont.load({
 	    google: {
-	      families: ['Comfortaa', 'Sarina', 'Yellowtail', 'Jua', 'Amatic SC', 'Titan One', "Do Hyeon"]
+	      families: ['Yellowtail', 'Jua', 'Amatic SC', 'Titan One', "Do Hyeon"]
 	    }
 	  });
 	</script>

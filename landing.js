@@ -1,6 +1,3 @@
-// Google Maps Geocoding API
-// AIzaSyBcK8Z27bIiwV_JXmDD8DsNXFB31BxBsx0
-
 'use strict';
 
 //IIFE
@@ -13,20 +10,22 @@
     var canvas = undefined;
     var ctx = undefined;
     var canvasContainer = undefined;
+    var nearbyButton = undefined;
     var searchButton = undefined;
     var queryBox = undefined;
     var resultsBox = undefined;
 
     var cData = undefined;
     var previousSearchTerm = undefined;
+    var geoEnabled = true;
     var numResults = 25;
 
     var currLat = 0;
     var currLong = 0;
     var cityStateString = undefined;
 
-    //var uri = "http://127.0.0.1:3000";
-    var uri = "https://bubblephoenix.csh.rit.edu/";
+    var uri = "http://127.0.0.1:3000";
+    //var uri = "https://bubblephoenix.csh.rit.edu/";
     //Charity Search API Key
     var apiKey = "cc68fc7689c5d78a918241ff8c0eb905";
 
@@ -50,11 +49,18 @@
         canvas = document.querySelector('canvas');
         ctx = canvas.getContext('2d');
         canvasContainer = document.querySelector('header');
+        nearbyButton = document.querySelector('#geoLocButton');
         searchButton = document.querySelector('#searchbutton');
         queryBox = document.querySelector('input');
         resultsBox = document.querySelector('#resultsbox');
 
         searchButton.onclick = performSearch;
+        nearbyButton.onclick = geoLocate;
+
+        queryBox.onkeydown = function() {
+          if(event.keyCode == 13)
+            performSearch();
+        };
 
         //Set canvas to fit container size
         canvas.width = canvasContainer.offsetWidth;
@@ -106,7 +112,7 @@
       	ctx.fillStyle = "pink";
         ctx.shadowColor = "#26466D";
         ctx.shadowBlur = 10;
-      	ctx.font = "3em 'Jua', 'Comfortaa'";
+      	ctx.font = "3em 'Jua', arial";
       	ctx.fillText("Bubble Phoenix", canvas.width / 2, 20);
 
     	   //ctx.fillStyle = "cyan";
@@ -124,9 +130,10 @@
 
     //Helper Functions
 
-    //Returns the time passed since the last time this function has been called
+    //Returns the time passed since the last time
+    // this function has been called
     function calculateDeltaTime() {
-  		var now,fps;
+  		var now, fps;
   		now = performance.now();
   		fps = 1000 / (now - previousUpdateTime);
   		fps = clamp(fps, 12, 60);
@@ -144,9 +151,6 @@
     function clamp(val, min, max){
     	return Math.max(min, Math.min(max, val));
     }
-
-
-
 
     //Particle Functions
 
@@ -276,6 +280,8 @@
     //Search Functions
 
     function performSearch() {
+        geoEnabled = true;
+
         //Grab search term
         var searchTerm = queryBox.value;
 
@@ -301,7 +307,6 @@
 
         var xhr = new XMLHttpRequest();
         xhr.onload = function() {
-          //parseCharities(xhr.responseText);
 
           var oldResults = resultsbox.children;
           var numOldResults = oldResults.length;
@@ -319,6 +324,57 @@
 
           parseCharities(xhr.responseText);
 
+        };
+
+        xhr.open('GET', url);
+        xhr.send();
+    }
+
+    function geoLocate() {
+      if("geolocation" in navigator)
+        navigator.geolocation.getCurrentPosition(geoLocSearch);
+      else
+        return;
+    }
+
+    function geoLocSearch(position) {
+        var coordinates = position.coords;
+        var lat = coordinates.latitude;
+        var long = coordinates.longitude;
+
+        if(!geoEnabled)
+          return;
+
+        geoEnabled = false;
+        previousSearchTerm = undefined;
+
+        //Make API request
+        var apiCallLink = "https://data.orghunter.com/v1/charitysearch?user_key=";
+        apiCallLink += apiKey + "&latitude=" + lat + "&longitude=" + long +
+        "&eligible=1" + "&rows=" + numResults;
+
+        apiCallLink = encodeURIComponent(apiCallLink);
+
+        var url = uri + "?url=" + apiCallLink;
+
+        var xhr = new XMLHttpRequest();
+        xhr.onload = function() {
+
+          var oldResults = resultsbox.children;
+          var numOldResults = oldResults.length;
+
+          //Fade out results and call the charity parsing function when the
+          //last element fades
+          var fade = 0;
+          for(var result of oldResults) {
+            fade += 20;
+            $(result).fadeOut(200 + fade);
+          }
+
+          currLat = 0;
+          currLong = 0;
+
+          parseCharities(xhr.responseText);
         };
 
         xhr.open('GET', url);
@@ -425,8 +481,6 @@
       var sunTime = JSON.parse(sunInfo);
 
       var sunTimes = sunTime.results;
-
-      console.dir(sunTimes);
 
       var sunRiseString = sunTimes.sunrise;
 

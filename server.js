@@ -1,3 +1,4 @@
+'use strict';
 var http = require('http');
 var fs = require("fs");
 var queryString = require('querystring');
@@ -9,6 +10,7 @@ var port = process.env.PORT || process.env.NODE_PORT || 3000;
 var index = fs.readFileSync(__dirname + "/landing.html");
 var styles = fs.readFileSync(__dirname + "/landingstyles.css");
 var landingjs = fs.readFileSync(__dirname + "/landing.js");
+var favicon = fs.readFileSync(__dirname + "/resources/favicon.png") || undefined;
 
 var responseHeaders = {
     "access-control-allow-origin": "*",
@@ -38,8 +40,11 @@ function onRequest(request, response) {
       response.write(landingjs);
       response.end();
       return;
-    } else if (request.url === "/charitySearch") {
-
+    } else if (request.url === "/resources/favicon.png") {
+      response.writeHead(200, {"Content-Type" : "image/png"});
+      response.write(favicon);
+      response.end();
+      return;
     }
     //Split after the ? mark to get the query string (key=value pairs)
     var query = request.url.split('?')[1];
