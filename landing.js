@@ -308,8 +308,9 @@
         var xhr = new XMLHttpRequest();
         xhr.onload = function() {
 
+          removeOldResults();
+          /*
           var oldResults = resultsbox.children;
-          var numOldResults = oldResults.length;
 
           //Fade out results and call the charity parsing function when the
           //last element fades
@@ -318,6 +319,7 @@
             fade += 20;
             $(result).fadeOut(200 + fade);
           }
+          */
 
           currLat = 0;
           currLong = 0;
@@ -359,20 +361,10 @@
 
         var xhr = new XMLHttpRequest();
         xhr.onload = function() {
-
-          var oldResults = resultsbox.children;
-          var numOldResults = oldResults.length;
-
-          //Fade out results and call the charity parsing function when the
-          //last element fades
-          var fade = 0;
-          for(var result in oldResults) {
-            fade += 20;
-            $(result).fadeOut(200 + fade);
-          }
-
           currLat = 0;
           currLong = 0;
+
+          removeOldResults();
 
           parseCharities(xhr.responseText);
         };
@@ -521,6 +513,17 @@
       setInterval(function() {
         $(".sunHeader").show(400);
       }, 450);
+    }
+
+    function removeOldResults() {
+      $('#resultsbox > div').fadeOut(200);
+      /*
+      var fade = 0;
+      for(var result in oldResults) {
+        fade += 20;
+        $(result).fadeOut(200 + fade);
+      }
+      */
     }
 
     function removePreviousSun() {
